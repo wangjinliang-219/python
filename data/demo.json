@@ -1,0 +1,14 @@
+{
+    "test_case1": {
+        "key": "value1",
+        "status_code": 200
+    },
+    "test_case2": {
+        "key": "value2",
+        "status_code": 200
+    },
+    "test_case3": {
+        "key": "value3",
+        "status_code": 200
+    }
+}

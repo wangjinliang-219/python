@@ -1,0 +1,7 @@
+2020-12-13 16:05:22,662 - ERROR - request.py[:75] - HTTPConnectionPool(host='192.168.137.1', port=9528): Max retries exceeded with url: /dev-api/account/login (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000000000360A390>: Failed to establish a new connection: [WinError 10060] 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。',))
+2021-01-09 16:20:23,510 - ERROR - mysql.py[:21] - (1049, "Unknown database 'tpshop'")
+2021-01-09 16:35:57,580 - ERROR - mysql.py[:105] - (1327, 'Undeclared variable: None')
+2021-01-09 16:36:21,867 - ERROR - mysql.py[:105] - (1327, 'Undeclared variable: None')
+2021-01-09 16:37:24,982 - ERROR - mysql.py[:105] - (1327, 'Undeclared variable: None')
+2021-01-09 16:40:27,969 - ERROR - mysql.py[:105] - (1327, 'Undeclared variable: None')
+2021-01-09 16:41:58,446 - ERROR - mysql.py[:105] - (1327, 'Undeclared variable: None')

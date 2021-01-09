@@ -1,0 +1,19 @@
+2020-12-13 16:00:35,404 - INFO - SELECT name FROM `user` WHERE age='188';
+2020-12-13 16:00:35,419 - DEBUG - [{'name': 'ww'}, {'name': 'alisi'}]
+2020-12-13 16:00:35,419 - INFO - INSERT INTO `user`(name,age) VALUES ('etr', '20');
+2020-12-13 16:00:35,435 - DEBUG - 0
+2020-12-13 16:00:35,435 - INFO - UPDATE `user` SET age='188' WHERE name='etr';
+2020-12-13 16:00:35,435 - DEBUG - 1
+2020-12-13 16:00:35,435 - INFO - DELETE FROM `user` WHERE name='saki';
+2020-12-13 16:00:35,450 - DEBUG - 3
+2020-12-13 16:03:32,198 - INFO - SELECT name FROM `user` WHERE age='188';
+2020-12-13 16:03:32,198 - DEBUG - [{'name': 'ww'}, {'name': 'alisi'}, {'name': 'etr'}]
+2020-12-13 16:03:32,198 - INFO - INSERT INTO `user`(name,age) VALUES ('etr', '20');
+2020-12-13 16:03:32,213 - DEBUG - 0
+2020-12-13 16:03:32,213 - INFO - UPDATE `user` SET age='188' WHERE name='etr';
+2020-12-13 16:03:32,245 - DEBUG - 1
+2020-12-13 16:03:32,245 - INFO - DELETE FROM `user` WHERE name='saki';
+2020-12-13 16:03:32,260 - DEBUG - 0
+2020-12-13 16:04:08,093 - DEBUG - Starting new HTTP connection (1): 192.168.137.1:9528
+2020-12-13 16:05:01,633 - DEBUG - Starting new HTTP connection (1): 192.168.137.1:9528
+2020-12-13 16:05:22,662 - ERROR - HTTPConnectionPool(host='192.168.137.1', port=9528): Max retries exceeded with url: /dev-api/account/login (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x000000000360A390>: Failed to establish a new connection: [WinError 10060] 由于连接方在一段时间后没有正确答复或连接的主机没有反应，连接尝试失败。',))
