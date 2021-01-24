@@ -87,10 +87,10 @@ def single_quotes_deal(cont):
         pass
 
 
-def read_conf(conf_name):
+def read_conf(conf_name="conf.ini", option="mysql"):
     cfp = configparser.ConfigParser()
     cfp.read("../config/" + conf_name, encoding="utf-8")
-    return cfp
+    return cfp[option]
 
 
 def include_symbol(iterable):

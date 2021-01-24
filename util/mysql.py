@@ -4,34 +4,37 @@ from util.common import *
 
 
 class MysqlDb(object):
-    cfp = read_conf("db.ini")
 
-    def __init__(self):
+    def __init__(self, option="mysql"):
+        self._cfp = read_conf(option=option)
         self.logger = get_logger()
+        self._connect()
+
+    def _connect(self):
         try:
-            self.conn = pymysql.connect(
-                host=self.cfp["mysql"]["host"],
-                port=int(self.cfp["mysql"]["port"]),
-                user=self.cfp["mysql"]["user"],
-                password=self.cfp["mysql"]["password"],
-                db=self.cfp["mysql"]["db"])
-            self.cursor = self.conn.cursor(pymysql.cursors.DictCursor)
+            self._conn = pymysql.connect(
+                host=self._cfp["host"],
+                port=int(self._cfp["port"]),
+                user=self._cfp["user"],
+                password=self._cfp["password"],
+                db=self._cfp["db"])
+            self._cursor = self._conn.cursor(pymysql.cursors.DictCursor)
 
         except pymysql.Error as e:
             self.logger.error(e)
             print('mysql连接失败', e)
 
     def __del__(self):
-        self.cursor.close()
-        self.conn.close()
+        self._cursor.close()
+        self._conn.close()
 
-    def execute(self, sql):
-        try:
-            self.cursor.execute(sql)
-            rowcount = self.cursor.rowcount
-            return rowcount
-        except pymysql.Error as e:
-            self.logger.debug(e)
+    # def execute(self, sql):
+    #     try:
+    #         self._cursor.execute(sql)
+    #         rowcount = self._cursor.rowcount
+    #         return rowcount
+    #     except pymysql.Error as e:
+    #         self.logger.debug(e)
 
     def __query_sql_format(self, table, columns=["*"], where=None, order=None, limit=None):
         columns = ",".join(columns)
@@ -97,24 +100,24 @@ class MysqlDb(object):
         self.logger.info(sql)
         if one:
             try:
-                self.cursor.execute(sql)
-                data = self.cursor.fetchone()
+                self._cursor.execute(sql)
+                data = self._cursor.fetchone()
                 self.logger.debug(data)
                 return data
 
             except pymysql.Error as e:
                 self.logger.error(e)
-                self.conn.rollback()
+                print(e)
         else:
             try:
-                self.cursor.execute(sql)
-                data = self.cursor.fetchall()
+                self._cursor.execute(sql)
+                data = self._cursor.fetchall()
                 self.logger.debug(data)
                 return data
 
             except pymysql.Error as e:
                 self.logger.error(e)
-                self.conn.rollback()
+                print(e)
 
     def insert(self, table, columns, values):
         '''
@@ -127,15 +130,16 @@ class MysqlDb(object):
         sql = self.__insert_sql_format(table=table, columns=columns, values=values)
         self.logger.info(sql)
         try:
-            self.cursor.execute(sql)
-            self.conn.commit()
-            res = self.cursor.lastrowid
+            self._cursor.execute(sql)
+            self._conn.commit()
+            res = self._cursor.lastrowid
             self.logger.debug(res)
             return res
 
         except pymysql.Error as e:
             self.logger.error(e)
-            self.conn.rollback()
+            print(e)
+            self._conn.rollback()
 
     def update(self, table, sets, where):
         '''
@@ -148,15 +152,16 @@ class MysqlDb(object):
         sql = self.__update_sql_format(table=table, sets=sets, where=where)
         self.logger.info(sql)
         try:
-            self.cursor.execute(sql)
-            self.conn.commit()
-            rowcount = self.cursor.rowcount
+            self._cursor.execute(sql)
+            self._conn.commit()
+            rowcount = self._cursor.rowcount
             self.logger.debug(rowcount)
             return rowcount
 
         except pymysql.Error as e:
             self.logger.error(e)
-            self.conn.rollback()
+            print(e)
+            self._conn.rollback()
 
     def delete(self, table, where):
         '''
@@ -168,18 +173,28 @@ class MysqlDb(object):
         sql = self.__delete_sql_format(table=table, where=where)
         self.logger.info(sql)
         try:
-            self.cursor.execute(sql)
-            self.conn.commit()
-            rowcount = self.cursor.rowcount
+            self._cursor.execute(sql)
+            self._conn.commit()
+            rowcount = self._cursor.rowcount
             self.logger.debug(rowcount)
             return rowcount
 
         except pymysql.Error as e:
             self.logger.error(e)
-            self.conn.rollback()
+            print(e)
+            self._conn.rollback()
 
 
 if __name__ == '__main__':
-    my = MysqlDb()
-    a = my.query(table="tp_goods", columns=["goods_id", "goods_name", "goods_sn", "store_count", "comment_count"], where=["click_count<20"], order=["goods_id"], limit=3, one=False)
+    my = MysqlDb("mysql")
+    a = my.query(table="user", columns=["name", "age"],where=["age=20"],limit=3, one=False)
     print(a)
+
+    b = my.insert(table="user", columns=["name", "age"], values=[("lisi", 28), ("wangwu", 78)])
+    print(b)
+
+    # c = my.update(table="user", sets=["name=1234"], where=["age=188"])
+    # print(c)
+    #
+    # d = my.delete(table="user", where=["age=188"])
+    # print(d)

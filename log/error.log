@@ -5,3 +5,7 @@
 2021-01-09 16:37:24,982 - ERROR - mysql.py[:105] - (1327, 'Undeclared variable: None')
 2021-01-09 16:40:27,969 - ERROR - mysql.py[:105] - (1327, 'Undeclared variable: None')
 2021-01-09 16:41:58,446 - ERROR - mysql.py[:105] - (1327, 'Undeclared variable: None')
+2021-01-24 11:09:53,251 - ERROR - mysql.py[:29] - (2003, "Can't connect to MySQL server on '127.0.0.1' ([WinError 10061] 由于目标计算机积极拒绝，无法连接。)")
+2021-01-24 11:30:05,263 - ERROR - mysql.py[:121] - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'bygoods_id limit 3' at line 1")
+2021-01-24 11:30:26,231 - ERROR - mysql.py[:121] - (1064, "You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''bygoods_id' limit 3' at line 1")
+2021-01-24 11:30:33,930 - ERROR - mysql.py[:121] - (1054, "Unknown column 'store_countcomment_count' in 'field list'")
