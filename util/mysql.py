@@ -28,14 +28,6 @@ class MysqlDb(object):
         self._cursor.close()
         self._conn.close()
 
-    # def execute(self, sql):
-    #     try:
-    #         self._cursor.execute(sql)
-    #         rowcount = self._cursor.rowcount
-    #         return rowcount
-    #     except pymysql.Error as e:
-    #         self.logger.debug(e)
-
     def __query_sql_format(self, table, columns=["*"], where=None, order=None, limit=None):
         columns = ",".join(columns)
         if where is not None:
@@ -187,7 +179,7 @@ class MysqlDb(object):
 
 if __name__ == '__main__':
     my = MysqlDb("mysql")
-    a = my.query(table="user", columns=["name", "age"],where=["age=20"],limit=3, one=False)
+    a = my.query(table="user", columns=["name", "age"], where=["age=20"], limit=3, one=False)
     print(a)
 
     b = my.insert(table="user", columns=["name", "age"], values=[("lisi", 28), ("wangwu", 78)])
